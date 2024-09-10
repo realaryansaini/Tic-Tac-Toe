@@ -16,6 +16,9 @@ nav.nav {
     font-size: 1.3rem;
     font-weight: 500;
     padding: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .container{
@@ -46,7 +49,7 @@ nav.nav {
 .result{
     text-align: center;
     font-size: 1.4rem;
-    height: 30px;
+    height: 10px;
     font-weight: 500;
     color: rgb(17, 138, 17);
 }
@@ -72,3 +75,17 @@ nav.nav {
     background-color: white;
 }
 
+
+/* .nav button[data-mode="1"]{
+    background-color: red;
+}
+
+.nav button[data-mode="0"]{
+    background-color: green;
+} */
+
+.nav button {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+}
