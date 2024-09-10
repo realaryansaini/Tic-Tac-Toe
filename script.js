@@ -1,11 +1,4 @@
 let buttons = document.querySelectorAll(".btn")
-// let game_mode = "friend"
-// if(localStorage.getItem("mode") == null){
-//    let game_mode = "friend"
-// }else{
-//    let game_mode = localStorage.getItem("mode")
-// }
-
 let block_input = () => {
    buttons.forEach((button) => {
       button.setAttribute('disabled', true)
@@ -122,91 +115,6 @@ let check_game_status = () => {
 }
 
 
-let handle1 = (button) => {
-   let cross_game = localStorage.getItem("cross_game")
-   if (cross_game !== null) {
-      if (cross_game == "0") {
-         localStorage.setItem("cross_game", "1")
-      } else {
-         localStorage.setItem("cross_game", "0")
-      }
-   } else {
-      localStorage.setItem("cross_game", "1")
-   }
-
-   if (localStorage.getItem("cross_game") == "0") {
-      button.innerText = "O"
-   }
-   else {
-      button.innerText = "X"
-   }
-
-   let obj = {}
-   let cross_data = localStorage.getItem("cross_data")
-   let button_id = button.getAttribute("data-id")
-   if (cross_data == null) {
-      obj[button_id] = localStorage.getItem("cross_game")
-      localStorage.setItem("cross_data", JSON.stringify([obj]))
-   } else {
-      obj[button_id] = localStorage.getItem("cross_game")
-      let new_cross_data = JSON.parse(cross_data)
-      new_cross_data.push(obj)
-      localStorage.setItem("cross_data", JSON.stringify(new_cross_data))
-   }
-
-   check_game_status()
-}
-
-
-let handle2 = (button) => {
-   button.setAttribute("disabled", true)
-   button.innerText = "X"
-   let disabled_buttons = document.querySelectorAll(".btn[disabled]")
-   // if(disabled_buttons.length == 1){
-   let not_disabled_buttons = document.querySelectorAll(".btn:not([disabled])")
-   const randomNumber = Math.floor(Math.random() * not_disabled_buttons.length);
-   let your_choice = not_disabled_buttons[randomNumber]
-   your_choice.innerText = "O"
-   your_choice.setAttribute("disabled", true)
-
-
-   let obj = {}
-   let obj2 = {}
-   let cross_data = localStorage.getItem("cross_data")
-   let button_id = button.getAttribute("data-id")
-   let button_id2 = your_choice.getAttribute("data-id")
-   if (cross_data == null) {
-      obj[button_id] = "1"
-      obj2[button_id2] = "0"
-      localStorage.setItem("cross_data", JSON.stringify([obj, obj2]))
-   } else {
-      obj[button_id] = "1"
-      obj2[button_id2] = "0"
-      localStorage.setItem("cross_data", JSON.stringify([obj, obj2]))
-      let new_cross_data = JSON.parse(cross_data)
-      new_cross_data.push(obj)
-      if (not_disabled_buttons.length !== 0) {
-         new_cross_data.push(obj2)
-      }
-      localStorage.setItem("cross_data", JSON.stringify(new_cross_data))
-   }
-
-   check_game_status()
-}
-
-// let refresh_game_mode2 = (function1 , function2) => {
-//    let buttons = document.querySelectorAll(".btn")
-//    buttons.forEach((button) => {
-//       button.removeEventListener("click", () => function1)
-//       button.addEventListener("click", () => function2)
-//    }
-//    )
-// }
-
-// buttons.forEach((button) => {
-//    button.addEventListener("click", () => handle1(button))
-// })
-
 let refresh_game_mode = (game_mode) => {
    buttons.forEach((button) => {
       button.setAttribute("data-listenderAdded", true)
@@ -291,17 +199,6 @@ let refresh_game_mode = (game_mode) => {
 }
 
 
-// let remove_listener = ()=>{
-//    let buttons = document.querySelectorAll(".btn")
-//    buttons.forEach((button)=>{
-//       if(button.getAttribute("data-listenderAdded") == true){
-//          button.removeEventListener("click", ()=>{})
-//       }
-//      console.log(button.getAttribute("data-listenderAdded"));
-
-//    })
-// }
-
 
 let cross_data = JSON.parse(localStorage.getItem("cross_data"))
 if (cross_data !== null) {
@@ -335,7 +232,7 @@ let reset = () => {
 
 
 let change_mode = () => {
-   if (localStorage.getItem("mode") == "friend") {
+   if (localStorage.getItem("mode") == "friend" || localStorage.getItem("mode") == null) {
       localStorage.setItem("mode", "computer")
    } else {
       localStorage.setItem("mode", "friend")
