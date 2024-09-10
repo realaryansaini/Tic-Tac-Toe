@@ -4,6 +4,16 @@ let block_input = ()=>{
       button.setAttribute('disabled' , true)
    })
 }
+
+let change_bg_green = (first , second ,third)=>{
+    buttons.forEach((button)=>{
+      let button_id = button.getAttribute("data-id")
+        if (button_id == first || button_id == second || button_id == third){
+         button.style.backgroundColor = "#008000c7"
+        }
+    })
+}
+
 let result = document.querySelector(".result")
 let check_game_status = () => {
    let cross_data = JSON.parse(localStorage.getItem("cross_data"))
@@ -11,18 +21,21 @@ let check_game_status = () => {
       try{if (cross_data.find(data => data.a1).a1 == cross_data.find(data => data.b1).b1 && cross_data.find(data => data.c1).c1 == cross_data.find(data => data.b1).b1) {
          result.innerText = `Player ${(cross_data.find(data => data.a1).a1 == 0)? "O" : "X"} Won the match`
          block_input()
+         change_bg_green("a1" , "b1" , "c1")
       }}
       catch(err){console.log(err)}
       try{if (cross_data.find(data => data.a2).a2 == cross_data.find(data => data.b2).b2 && cross_data.find(data => data.c2).c2 == cross_data.find(data => data.b2).b2) {
          console.log("you win " + cross_data.find(data => data.a2).a2);
          result.innerText = `Player ${(cross_data.find(data => data.a2).a2 == 0)? "O" : "X"} Won the match`
          block_input()
+         change_bg_green("a2" , "b2" , "c2")
       }}
       catch(err){console.log(err)}
       try{if (cross_data.find(data => data.a3).a3 == cross_data.find(data => data.b3).b3 && cross_data.find(data => data.c3).c3 == cross_data.find(data => data.b3).b3) {
          console.log("you win " + cross_data.find(data => data.a3).a3);
          result.innerText = `Player ${(cross_data.find(data => data.a3).a3 == 0)? "O" : "X"} Won the match`
          block_input()
+         change_bg_green("a3" , "b3" , "c3")
       }}
       catch(err){console.log(err)}
       
@@ -30,18 +43,21 @@ let check_game_status = () => {
          console.log("you win " + cross_data.find(data => data.a1).a1);
          result.innerText = `Player ${(cross_data.find(data => data.a1).a1 == 0)? "O" : "X"} Won the match`
          block_input()
+         change_bg_green("a1", "a2" , "a3")
       }}
       catch(err){console.log(err)}
       try{if (cross_data.find(data => data.b1).b1 == cross_data.find(data => data.b2).b2 && cross_data.find(data => data.b3).b3 == cross_data.find(data => data.b2).b2) {
          console.log("you win " + cross_data.find(data => data.b1).b1);
          result.innerText = `Player ${(cross_data.find(data => data.b1).b1 == 0)? "O" : "X"} Won the match`
          block_input()
+         change_bg_green("b1" , "b2" ,'b3')
       }}
       catch(err){console.log(err)}
       try{if (cross_data.find(data => data.c1).c1 == cross_data.find(data => data.c2).c2 && cross_data.find(data => data.c3).c3 == cross_data.find(data => data.c1).c1) {
          console.log("you win " + cross_data.find(data => data.c1).c1);
          result.innerText = `Player ${(cross_data.find(data => data.c1).c1 == 0)? "O" : "X"} Won the match`
          block_input()
+         change_bg_green("c1" ,"c2" ,"c3")
       }}
       catch(err){console.log(err)}
       
@@ -49,12 +65,14 @@ let check_game_status = () => {
          console.log("you win " + cross_data.find(data => data.a1).a1);
          result.innerText = `Player ${(cross_data.find(data => data.a1).a1 == 0)? "O" : "X"} Won the match`
          block_input()
+         change_bg_green("a1" , "b2" ,"c3")
       }}
       catch(err){console.log(err)}
       try{if (cross_data.find(data => data.c1).c1 == cross_data.find(data => data.b2).b2 && cross_data.find(data => data.a3).a3 == cross_data.find(data => data.b2).b2) {
          console.log("you win " + cross_data.find(data => data.c1).c1);
          result.innerText = `Player ${(cross_data.find(data => data.c1).c1 == 0)? "O" : "X"} Won the match`
          block_input()
+         change_bg_green("c1" ,"b2" ,"a3")
       } }
       catch(err){console.log(err)}
       if(cross_data.length == 9){
@@ -125,7 +143,15 @@ if (cross_data !== null) {
 
 let reset = () => {
    localStorage.removeItem("cross_data")
-   window.location.reload()
+   // window.location.reload()
+   buttons.forEach((button)=>{
+      // button.setAttribute("disabled" , false)
+      button.removeAttribute("disabled")
+      button.innerText = ""
+      result.innerText = ""
+      localStorage.removeItem("cross_game")
+      button.style.backgroundColor = "white"
+   })
 }
 
 
