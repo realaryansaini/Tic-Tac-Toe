@@ -7,13 +7,25 @@ body{
     padding: 0;
 }
 
+nav.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background-color: rgba(255, 0, 0, 0.623);
+    font-size: 1.3rem;
+    font-weight: 500;
+    padding: 14px;
+}
+
 .container{
- min-height: calc(100vh - 100px);
+ min-height: calc(100vh - 150px);
  display: flex;
  justify-content: center;
  flex-direction: column;
  gap: 10px;
  align-items: center;
+ margin-top: 80px;
 }
 
 .reset{
@@ -39,7 +51,7 @@ body{
     color: rgb(17, 138, 17);
 }
 .game_container{
-    width: min(100vw , 500px);
+    width: min(100vw , 400px);
     aspect-ratio: 1;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
